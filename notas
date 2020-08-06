@@ -1,0 +1,15 @@
+
+#App
+docker build -t pokemon-app .
+docker run --rm -it -p 8082:8082 pokemon-app
+docker run --rm -it -e TOKEN_SEMILLA=b2FkIjp7Im5v -p 8082:8082 pokemon-app
+docker run --rm -it -e TOKEN_SEMILLA=b2FkIjp7Im5v --network="host" pokemon-app
+# Produccion: 'postgres://euokdekd:w_e5e-bVjrvUIMsU_Q1sTPwh3eROJQTy@ruby.db.elephantsql.com:5432/euokdekd'
+docker run --rm -it -e TOKEN_SEMILLA=b2FkIjp7Im5v --network="host" -e USER_POSTGRES=euokdekd -e PASS_POSTGRES=w_e5e-bVjrvUIMsU_Q1sTPwh3eROJQTy -e HOST_POSTGRES=ruby.db.elephantsql.com -e DB_POSTGRES=euokdekd pokemon-app
+
+
+#BD PostgreSQL
+docker volume create volume_pokemon_postgresql
+docker run --rm -d --name postgres_pokemon -e POSTGRES_PASSWORD=toor -p 5432:5432 --mount src=volume_pokemon_postgresql,dst=/var/lib/postgresql/data postgres:9.6
+
+
