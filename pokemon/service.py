@@ -8,6 +8,7 @@ from . import authorization
 
 cadena_postgresql = config.get_variables_entorno()['cadena_postgresql']
 cadena_mongo = config.get_variables_entorno()['cadena_mongo']
+
 token_semilla = config.get_variables_entorno()['token_semilla']
 token_tiempo_expiracion = timedelta(hours=8)
 token_tiempo_delay = timedelta(minutes=5)
@@ -50,6 +51,7 @@ def find(filters,token):
 
 
 def login(usuario,password):
+    print(token_semilla)
     try:
         if usuario not in ['yao','admin']:
             return {'ok': False, 'code': 400, 'msj': 'Usuario no existe'}
